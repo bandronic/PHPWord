@@ -66,6 +66,15 @@ class Image extends AbstractElement
 
         $xmlWriter->startElement('w:r');
 
+        // Write Link
+        if($element->getHyperlink() !== null) {
+            $hyperlink = $element->getHyperlink();
+            $hyperlinkId = $hyperlink->getRelationId() + ($hyperlink->isInSection() ? 6 : 0);
+            $xmlWriter->startElement('w:hyperlink');
+            $xmlWriter->writeAttribute('r:id', 'rId' . $hyperlinkId);
+            $xmlWriter->writeAttribute('w:history', '1');
+        }
+
         // Write position
         $position = $style->getPosition();
         if ($position && $style->getWrap() == FrameStyle::WRAP_INLINE) {
@@ -88,6 +97,12 @@ class Image extends AbstractElement
 
         $xmlWriter->endElement(); // v:shape
         $xmlWriter->endElement(); // w:pict
+
+        // Close Link element
+        if($element->getHyperlink() !== null) {
+            $xmlWriter->endElement(); // w:hyperlink
+        }
+
         $xmlWriter->endElement(); // w:r
 
         $this->endElementP();

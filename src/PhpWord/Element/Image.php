@@ -122,6 +122,13 @@ class Image extends AbstractElement
     protected $mediaRelation = true;
 
     /**
+     * Add link to an image
+     *
+     * @var Link
+     */
+    protected $hyperlink = null;
+
+    /**
      * Create new image element
      *
      * @param string $source
@@ -569,5 +576,24 @@ class Image extends AbstractElement
     public function getIsMemImage()
     {
         return $this->isMemImage();
+    }
+
+    /**
+     * @return Link
+     */
+    public function getHyperlink()
+    {
+        return $this->hyperlink;
+    }
+
+    /**
+     * @param Link $hyperlink
+     */
+    public function setHyperlink($hyperlink)
+    {
+        $this->hyperlink = $hyperlink;
+
+        // Set parent to link so link will not print
+        $hyperlink->setParent($this);
     }
 }

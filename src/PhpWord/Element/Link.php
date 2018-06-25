@@ -69,6 +69,13 @@ class Link extends AbstractElement
     protected $internal = false;
 
     /**
+     * If a link has a parent, it will not render
+     *
+     * @var null
+     */
+    protected $parent = null;
+
+    /**
      * Create a new Link Element
      *
      * @param string $source
@@ -176,5 +183,21 @@ class Link extends AbstractElement
     public function isInternal()
     {
         return $this->internal;
+    }
+
+    /**
+     * @return null
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param null $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
     }
 }

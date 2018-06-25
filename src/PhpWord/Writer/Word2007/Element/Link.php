@@ -35,6 +35,10 @@ class Link extends Text
             return;
         }
 
+        if ($element->getParent() !== null) {
+            return;
+        }
+
         $rId = $element->getRelationId() + ($element->isInSection() ? 6 : 0);
 
         $this->startElementP();
